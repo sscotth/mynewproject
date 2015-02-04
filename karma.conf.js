@@ -1,7 +1,10 @@
-module.exports = function(config) {
+/* jshint node: true */
+
+module.exports = function (config) {
+  'use strict';
 
   var customLaunchers = {
-    'SL_IE9': {
+    SL_IE9: {
       base: 'SauceLabs',
       platform: 'Windows 7',
       browserName: 'internet explorer',

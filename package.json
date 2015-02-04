@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --single-run"
+    "lint": "npm run lint-json && npm run lint-js && npm run lint-js-style",
+    "lint-js": "jshint .",
+    "lint-js-style": "jscs .",
+    "lint-json": "jsonlint -q package.json bower.json .jscsrc .jshintrc",
+    "test": "npm run lint && ./node_modules/karma/bin/karma start --single-run"
   },
   "repository": {
     "type": "git",
