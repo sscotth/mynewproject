@@ -8,3 +8,5 @@
 [![My Status](https://img.shields.io/badge/caffeine%20level-82%-abcdef.svg)](http://wifflegif.com/gifs/255058-third-year-student-problems-gif)
 
 [![Gitter chat](http://badges.gitter.im/sscotth/mynewproject.svg)](https://gitter.im/sscotth/mynewproject)
+
+[![Contains Cat GIFs Badge](http://forthebadge.com/images/badges/contains-cat-gifs.svg)](http://forthebadge.com)
