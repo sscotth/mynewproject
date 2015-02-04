@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "npm run lint-json && npm run lint-js && npm run lint-js-style",
-    "lint-js": "jshint .",
-    "lint-js-style": "jscs .",
-    "lint-json": "jsonlint -q package.json bower.json .jscsrc .jshintrc",
+    "lint-js": "./node_modules/jshint/bin/jshint .",
+    "lint-js-style": "./node_modules/jscs/bin/jscs .",
+    "lint-json": "./node_modules/jsonlint/lib/cli.js -q package.json bower.json .jscsrc .jshintrc",
     "test": "npm run lint && ./node_modules/karma/bin/karma start --single-run"
   },
   "repository": {
@@ -24,6 +24,9 @@
     "chai": "^1.10.0",
     "codeclimate-test-reporter": "0.0.4",
     "istanbul": "^0.3.5",
+    "jscs": "^1.10.0",
+    "jshint": "^2.6.0",
+    "jsonlint": "^1.6.2",
     "karma": "^0.12.31",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.1.7",
