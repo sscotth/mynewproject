@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "lint": "npm run lint-json && npm run lint-js && npm run lint-js-style",
+    "lint-save-exit-code": "exitcode=0 ; npm run lint-json || exitcode=$? ; npm run lint-js || exitcode=$? ; npm run lint-js-style || exitcode=$?",
     "lint-js": "./node_modules/jshint/bin/jshint .",
     "lint-js-style": "./node_modules/jscs/bin/jscs .",
     "lint-json": "./node_modules/jsonlint/lib/cli.js -q package.json bower.json .jscsrc .jshintrc",
-    "test": "npm run lint && ./node_modules/karma/bin/karma start --single-run"
+    "test-karma": "./node_modules/karma/bin/karma start --single-run",
+    "test": "npm run lint-save-exit-code && npm run test-karma && exit $exitcode"
   },
   "repository": {
     "type": "git",
