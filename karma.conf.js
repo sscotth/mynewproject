@@ -72,6 +72,8 @@ module.exports = function(config) {
         testName: 'My App Unit Tests'
     },
 
+    captureTimeout: 120000,
+
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false
