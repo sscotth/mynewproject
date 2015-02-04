@@ -66,7 +66,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS', 'SL_IE9'],
+    browsers: ['PhantomJS', 'Firefox', 'SL_IE9'],
 
     sauceLabs: {
         testName: 'My App Unit Tests'
