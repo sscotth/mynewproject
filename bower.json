@@ -13,6 +13,8 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
+    "jqurey": "~2.1.3"
   }
 }
