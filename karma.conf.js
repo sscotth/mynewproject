@@ -3,6 +3,7 @@ module.exports = function(config) {
   var customLaunchers = {
     'SL_IE9': {
       base: 'SauceLabs',
+      platform: 'Windows 7',
       browserName: 'internet explorer',
       version: '9'
     }
