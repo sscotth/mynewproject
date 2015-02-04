@@ -73,7 +73,7 @@ module.exports = function(config) {
     browsers: ['PhantomJS', 'Firefox', 'SL_IE9'],
 
     sauceLabs: {
-        testName: 'My App Unit Tests'
+        testName: 'sscotth/mynewproject Unit Tests'
     },
 
     captureTimeout: 120000,
