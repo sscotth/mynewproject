@@ -171,9 +171,9 @@ _blanket.extend({
             _blanket._loadFile(_blanket.options("reporter"));
             _blanket.customReporter(coverage_data,_blanket.options("reporter_options"));
         }else if (typeof _blanket.options("reporter") === "function"){
-            _blanket.options("reporter")(coverage_data);
+            _blanket.options("reporter")(coverage_data,_blanket.options("reporter_options"));
         }else if (typeof _blanket.defaultReporter === 'function'){
-            _blanket.defaultReporter(coverage_data);
+            _blanket.defaultReporter(coverage_data,_blanket.options("reporter_options"));
         }else{
             throw new Error("no reporter defined.");
         }
@@ -210,8 +210,8 @@ _blanket.extend({
                 _blanket.blanketSession = JSON.parse(sessionStorage["blanketSessionLoader"]);
             }
             
-            scripts.forEach(function(file,indx){   
-                _blanket.utils.cache[file+".js"]={
+            scripts.forEach(function(file,indx){
+                _blanket.utils.cache[file]={
                     loaded:false
                 };
             });
@@ -225,7 +225,7 @@ _blanket.extend({
                 if (currScript >= scripts.length){
                   return null;
                 }
-                return scripts[currScript]+".js";
+                return scripts[currScript];
             },callback);
         }
     },

@@ -1,15 +1,31 @@
 var extend = require("xtend"),
-    join = require('path').join;
+    path = require('path'),
+    join = path.join;
+
 
 var blanketNode = function (userOptions,cli){
 
     var fs = require("fs"),
         path = require("path"),
         configPath = process.cwd() + '/package.json',
-        file = fs.existsSync(configPath) ? JSON.parse((fs.readFileSync(configPath, 'utf8')||{})) : {},
-        packageConfigs = file.scripts &&
-                        file.scripts.blanket,
-        blanketConfigs = packageConfigs ? extend(file.scripts.blanket,userOptions) : userOptions,
+        existsSync = fs.existsSync || path.existsSync,
+        file = existsSync(configPath) ? JSON.parse((fs.readFileSync(configPath, 'utf8')||{})) : null,
+        packageConfigs;
+
+    if (file){
+        var scripts = file.scripts,
+            config = file.config;
+
+        if (scripts && scripts.blanket){
+            console.warn("BLANKET-" + path + ": `scripts[\"blanket\"]` is deprecated. Please migrate to `config[\"blanket\"]`.\n");
+            packageConfigs = scripts.blanket;
+        } else if (config && config.blanket){
+            packageConfigs = config.blanket;
+        }
+    }
+
+    var blanketConfigs = packageConfigs ? extend(packageConfigs,userOptions) : userOptions,
+
         pattern = blanketConfigs  ?
                           blanketConfigs.pattern :
                           "src",
@@ -17,9 +33,6 @@ var blanketNode = function (userOptions,cli){
         oldLoader = require.extensions['.js'],
         newLoader;
 
-    if (cli && !packageConfigs){
-        throw new Error("Options must be provided for Blanket in your package.json");
-    }
     function escapeRegExp(str) {
         return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
@@ -52,6 +65,9 @@ var blanketNode = function (userOptions,cli){
                 newOptions.branchTracking = !!optionValue.branchTracking;
                 newOptions.debug = !!optionValue.debug;
                 newOptions.engineOnly = !!optionValue.engineOnly;
+            }
+            if (option === "data-cover-reporter-options"){
+                newOptions.reporter_options = optionValue;
             }
         });
         blanket.options(newOptions);
@@ -111,23 +127,32 @@ var blanketNode = function (userOptions,cli){
     if (!blanket.options("engineOnly")){
         //instrument js files
         require.extensions['.js'] = function(localModule, filename) {
-            var pattern = blanket.options("filter");
-            var originalFilename = filename;
+            var pattern = blanket.options("filter"),
+                reporter_options = blanket.options("reporter_options"),
+                originalFilename = filename,
+			inputFilename = filename;
             filename = blanket.normalizeBackslashes(filename);
 
             //we check the never matches first
             var antipattern = _blanket.options("antifilter");
             if (typeof antipattern !== "undefined" &&
-                    blanket.normalizeBackslashes(filename.replace(/\.js$/,""),antipattern)
+                    blanket.matchPattern(filename.replace(/\.js$/,""),antipattern)
                 ){
                 oldLoader(localModule,filename);
                 if (_blanket.options("debug")) {console.log("BLANKET-File will never be instrumented:"+filename);}
             }else if (blanket.matchPattern(filename,pattern)){
                 if (_blanket.options("debug")) {console.log("BLANKET-Attempting instrument of:"+filename);}
                 var content = fs.readFileSync(filename, 'utf8');
+                if (reporter_options && reporter_options.shortnames){
+                    inputFilename = filename.replace(path.dirname(filename),"");
+                }
+                if (reporter_options && reporter_options.basepath){
+                    inputFilename = filename.replace(reporter_options.basepath + '/',"");
+                }
+
                 blanket.instrument({
                     inputFile: content,
-                    inputFileName: filename
+                    inputFileName: inputFilename
                 },function(instrumented){
                     var baseDirPath = blanket.normalizeBackslashes(path.dirname(filename))+'/.';
                     try{
@@ -166,10 +191,19 @@ if ((process.env && process.env.BLANKET_COV===1) ||
     module.exports = blanketNode({engineOnly:true},false);
 }else{
     var args = process.argv;
+    var blanketRequired = false;
+
+    for (var i = 0; i < args.length; i++) {
+        if (['-r', '--require'].indexOf(args[i]) >= 0 &&
+            args[i + 1] === 'blanket') {
+            blanketRequired = true;
+        }
+    }
+
     if (args[0] === 'node' &&
         args[1].indexOf(join('node_modules','mocha','bin')) > -1 &&
-        (args.indexOf('--require') > 1 || args.indexOf('-r') > -1) &&
-         args.indexOf('blanket') > 2){
+        blanketRequired){
+
         //using mocha cli
         module.exports = blanketNode(null,true);
     }else{
