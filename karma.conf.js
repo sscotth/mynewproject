@@ -1,7 +1,14 @@
-// Karma configuration
-// Generated on Wed Feb 04 2015 00:05:53 GMT-0600 (CST)
-
 module.exports = function(config) {
+
+  var customLaunchers = {
+    'SL_IE9': {
+      base: 'SauceLabs',
+      browserName: 'internet explorer',
+      version: '9'
+    }
+  };
+
+
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -54,10 +61,11 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
+    customLaunchers: customLaunchers,
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['PhantomJS', 'SL_IE9'],
 
 
     // Continuous Integration mode
