@@ -1,0 +1,23 @@
+{
+  "name": "mynewproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sscotth/mynewproject"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sscotth/mynewproject/issues"
+  },
+  "homepage": "https://github.com/sscotth/mynewproject",
+  "devDependencies": {
+    "mocha-phantomjs": "^3.5.3",
+    "phantomjs": "^1.9.15"
+  }
+}

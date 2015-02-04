@@ -1,0 +1,21 @@
+{
+  "name": "mynewproject",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sscotth/mynewproject",
+  "authors": [
+    "Scott <scott@sscotth.io>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "chai": "~1.10.0",
+    "mocha": "~2.1.0",
+    "blanket": "~1.1.5"
+  }
+}
