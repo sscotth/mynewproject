@@ -5,14 +5,13 @@
   "main": "index.js",
   "scripts": {
     "lint": "npm run lint-json && npm run lint-js && npm run lint-js-style",
-    "lint-save-exit-code": "exitcode=0 ; npm run lint-json || exitcode=$? ; npm run lint-js || exitcode=$? ; npm run lint-js-style || exitcode=$?",
     "lint-js": "./node_modules/jshint/bin/jshint .",
     "lint-js-style": "./node_modules/jscs/bin/jscs .",
     "lint-json": "./node_modules/jsonlint/lib/cli.js -q package.json bower.json .jscsrc .jshintrc",
     "test-karma": "./node_modules/karma/bin/karma start",
     "test": "npm run lint ; npm run test-karma -- --single-run",
     "ci-test": "npm run test-karma -- karma.conf-ci.js",
-    "ci-lint-and-test": "exitcode=0 ; npm run lint-json || exitcode=$? ; npm run lint-js || exitcode=$? ; npm run lint-js-style || exitcode=$? && npm run ci-test && echo exitcode && echo $exitcode && exit $exitcode"
+    "ci-lint-and-test": "exitcode=0 ; npm run lint-json || exitcode=$? ; npm run lint-js || exitcode=$? ; npm run lint-js-style || exitcode=$? && npm run ci-test && exit $exitcode"
   },
   "repository": {
     "type": "git",
