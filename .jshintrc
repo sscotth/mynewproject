@@ -1,17 +1,21 @@
 {
+    "bitwise": true,
     "camelcase": true,
     "curly": true,
     "eqeqeq": true,
     "forin": true,
+    "freeze": true,
     "immed": true,
-    "indent": 2,
     "newcap": true,
     "noarg": true,
     "nonbsp": true,
     "nonew": true,
-    "quotmark": "single",
     "undef": true,
-    "unused": true,
     "strict": true,
-    "maxlen": 120
+    "trailing": true,
+    "indent": 2,
+    "maxlen": 120,
+    "latedef": true,
+    "quotmark": "single",
+    "unused": true
 }
