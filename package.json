@@ -11,7 +11,8 @@
     "lint-json": "./node_modules/jsonlint/lib/cli.js -q package.json bower.json .jscsrc .jshintrc",
     "test-karma": "./node_modules/karma/bin/karma start",
     "test": "npm run lint ; npm run test-karma -- --single-run",
-    "ci-test": "npm run lint-save-exit-code && npm run test-karma -- karma.conf-ci.js && echo exitcode && echo $exitcode && exit $exitcode"
+    "ci-test": "npm run test-karma -- karma.conf-ci.js",
+    "ci-lint-and-test": "npm run lint-save-exit-code && npm run ci-test && echo exitcode && echo $exitcode && exit $exitcode"
   },
   "repository": {
     "type": "git",
