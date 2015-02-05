@@ -7,7 +7,7 @@ before_install:
   - npm install -g npm
   - npm install bower
   - ./node_modules/bower/bin/bower install
-script: npm run ci-test
+script: npm run ci-lint-and-test
 after_script: cat ./coverage/PhantomJS*/lcov.info | ./node_modules/codeclimate-test-reporter/bin/codeclimate.js
 env:
   global:
