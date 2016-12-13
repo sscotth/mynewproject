@@ -6,7 +6,7 @@
   describe('test suite', function () {
     describe('mocha and chai', function () {
       it('should assert true', function () {
-        true.should.be.true;
+        true.should.be.false;
         false.should.be.false; // false.should.be.true should fail by default
       });
     });

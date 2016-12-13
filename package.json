@@ -8,6 +8,7 @@
     "lint-js": "./node_modules/jshint/bin/jshint .",
     "lint-js-style": "./node_modules/jscs/bin/jscs .",
     "lint-json": "./node_modules/jsonlint/lib/cli.js -q package.json bower.json .jscsrc .jshintrc",
+
     "test-karma": "./node_modules/karma/bin/karma start",
     "test": "npm run lint ; npm run test-karma -- --single-run",
     "ci-test": "npm run test-karma -- karma.conf-ci.js",
